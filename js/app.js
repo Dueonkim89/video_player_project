@@ -5,11 +5,23 @@ let numberOfDelays = [];
 let eventCatcher = [];
 let flag = false;
 
+let originalTimeInterval = [
+0, 4130, 7535, 11270, 13960, 17940, 22370, 26880, 32100, 34730, 39430, 42350, 46300, 49270, 53760, 57780
+];
+
 const videoPlayer = new MediaElementPlayer(video, {
 	features: ['playpause', 'current', 'progress', 'volume', 'duration', 'fullscreen'],
 	stretching: 'responsive'
 });
 
+//discovered a bug with my app, that i needed to fix. 
+function originalTimeSetter(index) {
+	for (let i = 0; i < originalTimeInterval.length; i++) {
+		if (index === i) {
+			paragraphElements[index].dataset.timeframe = originalTimeInterval[i];
+		}
+	}
+}
 
 function resetBackgroundColor() {
 	for (let i = 0; i < paragraphElements.length; i++) {
@@ -112,6 +124,8 @@ video.addEventListener('playing', (event) => {
 		let delayTime = secondTimeInterval - startingTimeInterval;
 		setDelay(paragraphElements[i], paragraphElements[i - 1], delayTime);
 	}
+	//fixed bug found in my app
+	originalTimeSetter(referenceIndex);
 	flag = true;
 });
 
