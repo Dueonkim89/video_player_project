@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Video Player Project</title>
+	<link href="https://fonts.googleapis.com/css?family=Neuton" rel="stylesheet">
+	<script src="build/jquery.js"></script>
+	<script src="build/mediaelement-and-player.min.js"></script>
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="build/mediaelementplayer.min.css">
+	<link rel="stylesheet" href="css/styles.css">
+</head>
+	<body>
+		<div class="videoWrapper">
+			<video controls  class="mejs__customskin" style="max-width: 100%;">   <!--INLINE STYLE IS NECCESSARY TO MAKE VIDEO FLUID -->
+				<source src="video/video.mp4" type="video/mp4">
+				<source src="video/video.ogg" type="video/ogg">
+			</video>
+		</div>
+	
+		<div class ="textWrapper">
+			
+			<div class="firstParagraph">
+				<p data-timeframe="0">Now that we've looked at the architecture of the internet, let's see how you might</p>
+				<p data-timeframe="4130">connect your personal devices to the internet inside your house.</p>
+				<p data-timeframe="7535">Well there are many ways to connect to the internet, and</p>
+				<p data-timeframe="11270">most often people connect wirelessly.</p>
+			</div>
+			
+			<div class="secondParagraph">
+				<p data-timeframe="13960">Let's look at an example of how you can connect to the internet.</p>
+				<p data-timeframe="17940">If you live in a city or a town, you probably have a coaxial cable for</p>
+				<p data-timeframe="22370">cable Internet, or a phone line if you have DSL, running to the outside of</p>
+				<p data-timeframe="26880">your house, that connects you to the Internet Service Provider, or ISP.</p>
+				<p data-timeframe="32100">If you live far out in the country, you'll more likely have</p>
+				<p data-timeframe="34730">a dish outside your house, connecting you wirelessly to your closest ISP, or</p>
+				<p data-timeframe="39430">you might also use the telephone system.</p>
+			</div>
+		
+			<div class="thirdParagraph">
+				<p data-timeframe="42350">Whether a wire comes straight from the ISP hookup outside your house, or</p>
+				<p data-timeframe="46300">it travels over radio waves from your roof,</p>
+				<p data-timeframe="49270">the first stop a wire will make once inside your house, is at your modem.</p>
+				<p data-timeframe="53760">A modem is what connects the internet to your network at home.</p>
+				<p data-timeframe="57780">A few common residential modems are DSL or</p>
+			
+			</div>
+				
+		</div>
+			
+		<script src="js/app.js"></script>
+	</body>
