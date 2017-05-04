@@ -5,23 +5,10 @@ let numberOfDelays = [];
 let eventCatcher = [];
 let flag = false;
 
-let originalTimeInterval = [
-0, 4130, 7535, 11270, 13960, 17940, 22370, 26880, 32100, 34730, 39430, 42350, 46300, 49270, 53760, 57780
-];
-
 const videoPlayer = new MediaElementPlayer(video, {
 	features: ['playpause', 'current', 'progress', 'volume', 'duration', 'fullscreen'],
 	stretching: 'responsive'
 });
-
-//discovered a bug with my app, that i needed to fix. 
-function originalTimeSetter(index) {
-	for (let i = 0; i < originalTimeInterval.length; i++) {
-		if (index === i) {
-			paragraphElements[index].dataset.timeframe = originalTimeInterval[i];
-		}
-	}
-}
 
 function resetBackgroundColor() {
 	for (let i = 0; i < paragraphElements.length; i++) {
@@ -97,7 +84,6 @@ function findProperParagraph(currentTime) {
 	}
 }
 
-
 //ORIGINAL FUNCTION ASSUMING VIDEO ALWAYS PLAYS AT STARTING POINT OF 0:00:00
 //video.addEventListener('playing', (event) => {
 //	for (let i = 0; i < paragraphElements.length; i++) {
@@ -106,29 +92,21 @@ function findProperParagraph(currentTime) {
 //	}
 //});
 
-
-
 video.addEventListener('playing', (event) => {
 	//multiply by 1000 because the data attributes in html file are in this format. 
 	let currentTime = video.getCurrentTime() * 1000;
 	console.log(currentTime);
 	//run the function to see which paragraph to begin with. 
 	const referenceIndex = findProperParagraph(currentTime);
-	//change the data attribute to the time we logged. 
-	paragraphElements[referenceIndex].dataset.timeframe =  currentTime;
 	//remember the first starting index has already been ran, so we need to start from the second index.
 	const firstStartingIndex = referenceIndex + 1;
 	for (let i = firstStartingIndex; i < paragraphElements.length; i++) {
-		let startingTimeInterval = paragraphElements[referenceIndex].dataset.timeframe;
 		let secondTimeInterval = paragraphElements[i].dataset.timeframe;
-		let delayTime = secondTimeInterval - startingTimeInterval;
+		let delayTime = secondTimeInterval - currentTime;
 		setDelay(paragraphElements[i], paragraphElements[i - 1], delayTime);
 	}
-	//fixed bug found in my app
-	originalTimeSetter(referenceIndex);
 	flag = true;
 });
-
 
 video.addEventListener('ended', (event) => {
 	resetBackgroundColor();
@@ -138,7 +116,6 @@ video.addEventListener('pause', (event) => {
 	stopDelay(numberOfDelays);
 	resetBackgroundColor();
 });
-
 
 // loop thu all the paragraph elements to be able to play video by clicking on them.
 for (let i = 0; i < paragraphElements.length; i++) {
@@ -156,10 +133,8 @@ for (let i = 0; i < paragraphElements.length; i++) {
 		resetBackgroundColor();
 		//if multiple instances of setDelay running, we need to be able to cancel it. 
 		paragraphClickResetter(eventCatcher);
-		resetBackgroundColor();
+		//resetBackgroundColor();
 		video.play();
 	});
 }
 
-
-	
